@@ -1,0 +1,46 @@
+site_name: Kalculos Documentation
+site_url: https://kal.sfclub.cc
+site_description: "Documentations for projects from Kalculos"
+site_author: "Kalculos"
+repo_url: https://github.com/kalculos/document
+edit_uri: '/blob/main/'
+edit_uri_template: '/blob/main/{path}'
+theme:
+  name: material
+  features:
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
+  icon:
+    admonition:
+      note: octicons/tag-16
+      abstract: octicons/checklist-16
+      info: octicons/info-16
+      tip: octicons/squirrel-16
+      success: octicons/check-16
+      question: octicons/question-16
+      warning: octicons/alert-16
+      failure: octicons/x-circle-16
+      danger: octicons/zap-16
+      bug: octicons/bug-16
+      example: octicons/beaker-16
+      quote: octicons/quote-16
+plugins:
+  - search
+  - i18n:
+      default_language: zh
+      languages:
+        zh: 简体中文
+        en: English
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - attr_list
+  - md_in_html
