@@ -53,3 +53,16 @@ return newList;
 !!! info
 
     `ArrayList` 的快删是通过将末尾的元素覆盖到目标元素的位置上实现的。
+
+## WeakHashSet
+
+`WeakHashSet` 是基于 `WeakHashMap` 实现的。提供了和 `HashSet` 相当的查找/插入效率（但是可能稍慢些），并且具有 `WeakHashMap` 的特性——元素以弱引用形式储存。
+
+这意味着，当其他地方没有对某个元素的引用时，这个元素就*可能*被从 `WeakHashSet` 中移除。通常来说，移除的时机是不确定的，从中处理元素时候要注意这一点。
+
+另外，可以通过 `disableResizing()` 方法禁用底层 `WeakHashMap` 的自动扩容操作。
+
+## 迭代器
+
+Kiwi 还提供了一些简单的迭代器包装，分别是 `ArrayIterator`，`InfiniteIterator` 和 `SingleIterator`
+关于他们的用法请前往 Javadoc 查阅。
