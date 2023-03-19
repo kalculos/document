@@ -23,13 +23,14 @@ return newList;
 使用 Kiwi: `Lists.ofCopiedCompoundList(listA,listB)`
 
 2. **创建一个视图**   
-将两个 `List` 拼接到一起，避免花时间拷贝应用并且减少 GC 压力。
+将两个 `List` 拼接到一起，避免花时间拷贝引用并且减少 GC 压力。
 
 只需要使用 `Lists.ofCompoundListView(listA, listB)` 即可。
 
 !!! warning
 
     `ofCompoundListView` 返回的 `List` 不支持部分操作，例如 `retainAll`, `removeAll`, `containsAll` 和 `subList`，即使未来可能会支持。
+
     使用组合视图的最佳实践是*使其不可变*，也就是说一旦创建了组合视图就不对其内容做变更。如果你发现组合后的 List 仍然需要大量修改操作，那么你应该考虑的是 `ofCopiedCompoundList` 而不是 `ofCompoundListView`，后者总是用于某些处理的中间过程。
 
     如果你必须暴露组合视图，请考虑使用 JDK 提供的 `Collections.unmodifiableList()` 进行包装。
