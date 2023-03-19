@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+         <loc>https://kalculos.github.io/document/</loc>
+         <lastmod>2023-03-19</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="zh" href="https://kalculos.github.io/document/zh/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="https://kalculos.github.io/document/en/"/>
+         
+    </url>
+    <url>
+         <loc>https://kalculos.github.io/document/kiwi/collections/</loc>
+         <lastmod>2023-03-19</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="zh" href="https://kalculos.github.io/document/zh/kiwi/collections/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="https://kalculos.github.io/document/en/kiwi/collections/"/>
+         
+    </url>
+    <url>
+         <loc>https://kalculos.github.io/document/kiwi/exception-aware-functional-interfaces/</loc>
+         <lastmod>2023-03-19</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="zh" href="https://kalculos.github.io/document/zh/kiwi/exception-aware-functional-interfaces/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="https://kalculos.github.io/document/en/kiwi/exception-aware-functional-interfaces/"/>
+         
+    </url>
+    <url>
+         <loc>https://kalculos.github.io/document/kiwi/future/</loc>
+         <lastmod>2023-03-19</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="zh" href="https://kalculos.github.io/document/zh/kiwi/future/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="https://kalculos.github.io/document/en/kiwi/future/"/>
+         
+    </url>
+    <url>
+         <loc>https://kalculos.github.io/document/kiwi/</loc>
+         <lastmod>2023-03-19</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="zh" href="https://kalculos.github.io/document/zh/kiwi/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="https://kalculos.github.io/document/en/kiwi/"/>
+         
+    </url>
+    <url>
+         <loc>https://kalculos.github.io/document/kiwi/misc/</loc>
+         <lastmod>2023-03-19</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="zh" href="https://kalculos.github.io/document/zh/kiwi/misc/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="https://kalculos.github.io/document/en/kiwi/misc/"/>
+         
+    </url>
+    <url>
+         <loc>https://kalculos.github.io/document/kiwi/reflection/</loc>
+         <lastmod>2023-03-19</lastmod>
+         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="zh" href="https://kalculos.github.io/document/zh/kiwi/reflection/"/>
+         <xhtml:link rel="alternate" hreflang="en" href="https://kalculos.github.io/document/en/kiwi/reflection/"/>
+         
+    </url>
+</urlset>
