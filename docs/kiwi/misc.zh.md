@@ -75,7 +75,7 @@ Java 的泛型通过 *类型擦除* 实现，这意味着 `Collection<String>` �
 
 !!! warning
 
-    **乱用此工具很容易被揍**
+    乱用此工具很容易被揍
 
 使用 `deAsync(Consumer<Promise,?>) throws InterruptedException` 可以堵塞当前线程，一直到 `Promise` 被完成为止。
 

@@ -17,12 +17,12 @@ Kiwi.fromAny(()->Files.readString(Path.of("..."))).orElseThrow();
 
 而 `runAny` 和 `fromAny` 很相似，只是它不要求你返回任何东西，它返回的成功 `Result` 结果总是 `null`，也就是说，如果配合 `Result#exceptNoNull` 使用的话无论如何都会失败。
 
-## Example
+!!! example
 
-```java
-Kiwi.fromAny(this::fetchNetworkAPI)
-  .exceptNoNull()
-  .onSuccess(this::processData)
-  .onFailure(it -> ... revert some operations ...);
-```
+    ```java
+    Kiwi.fromAny(this::fetchNetworkAPI)
+      .exceptNoNull()
+      .onSuccess(this::processData)
+      .onFailure(it -> ... revert some operations ...);
+    ```
 
