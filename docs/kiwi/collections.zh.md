@@ -10,7 +10,9 @@ Kiwi-Collection 提供了一些与 Java 集合相关的工具类。
 
 我们有时候经常需要将两个或多个 `List` 合并作为某个参数传出或者用于遍历，这样做有两种方式：
 
-1. **拷贝到新的 List** 这样做很简单，但是对于长集合或者高频操作来说相当消耗内存。
+1. **拷贝到新的 List**    
+这样做很简单，但是对于长集合或者高频操作来说相当消耗内存。
+
 ``` java
 var newList = new ArrayList<T>(listA.size() + listB.size());
 newList.addAll(listA);
@@ -20,7 +22,9 @@ return newList;
 
 使用 Kiwi: `Lists.ofCopiedCompoundList(listA,listB)`
 
-2. **创建一个视图** 将两个 `List` 拼接到一起，避免花时间拷贝应用并且减少 GC 压力。
+2. **创建一个视图**   
+将两个 `List` 拼接到一起，避免花时间拷贝应用并且减少 GC 压力。
+
 只需要使用 `Lists.ofCompoundListView(listA, listB)` 即可。
 
 !!! warning
