@@ -2,6 +2,8 @@
 
 Expressive Java utilites and robost libraries tuned for performance.
 
+Documentation & API work in progress.
+
 # 上手使用
 
 当前版本为：![badge](https://img.shields.io/github/v/release/kalculos/kiwi?style=flat-square)
@@ -17,8 +19,7 @@ repositories {
     }
 }
 dependencies {
-    api "io.ib67.kiwi:core:$kiwiVersion"
-    api "io.ib67.kiwi:collection:$kiwiVersion"
+    api "io.ib67.kiwi:lang:$kiwiVersion"
 }
 ```
 
