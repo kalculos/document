@@ -15,7 +15,7 @@ def kiwiVersion = "1.0.0" // kiwi 的版本号，此处可能并不是最新版�
 repositories {
     maven {
         name = "Kalculos"
-        url = "https://repo.sfclub.cc"
+        url = "https://repo.sfclub.cc/releases"
     }
 }
 dependencies {
