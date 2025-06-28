@@ -1,21 +1,25 @@
-# 简介
+# Kiwi
 
-[Kiwi](https://github.com/kalculos/kiwi) 是一系列服务于 Java 程序日常开发的工具类，以最大可复用性为目标精挑细选而成。
+Expressive Java utilites and robost libraries tuned for performance.
 
 # 上手使用
-
-使用主流的包管理器，或者从 [Maven Central](https://search.maven.org/search?q=io.ib67.kiwi) 自行下载 JAR 包导入使用。
 
 当前版本为：![badge](https://img.shields.io/github/v/release/kalculos/kiwi?style=flat-square)
 
 添加到你的 `build.gradle`:
 
 ```groovy
-def kiwiVersion = "0.4.1" // kiwi 的版本号，此处可能并不是最新版本
+def kiwiVersion = "1.0.0" // kiwi 的版本号，此处可能并不是最新版本
+repositories {
+    maven {
+        name = "Kalculos"
+        url = "https://repo.sfclub.cc"
+    }
+}
 dependencies {
     api "io.ib67.kiwi:core:$kiwiVersion"
     api "io.ib67.kiwi:collection:$kiwiVersion"
 }
 ```
 
-*Kiwi 始终使用最新的长期支持版本的 Java 编译。*
+从 1.0.0 开始，Kiwi 使用 Java 21 编译。对于 0.xx 版本的 Kiwi 文档，可以在 [这里](https://github.com/kalculos/document/tree/11fb0e2015e3bbd50efa342d81960c8bc94acd2a) 找到。
