@@ -51,8 +51,11 @@ plugins:
   - i18n:
       default_language: zh
       languages:
-        zh: 简体中文
-        en: English
+        - locale: zh
+          name: 简体中文
+          default: true
+        - locale: en
+          name: English
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true

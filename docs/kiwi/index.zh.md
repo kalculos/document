@@ -1,4 +1,4 @@
-# Kiwi
+# What's Kiwi
 
 Expressive Java utilites and robost libraries tuned for performance.
 

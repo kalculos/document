@@ -1,8 +1,9 @@
 # Uni & Result
 
-`Uni<T>` 是 kiwi-lang 的核心部分，在 kiwi 的其他组件中也不乏它的身影。简单的说，你可以把它理解为一个包装成 `Stream<T>` 模式的 `Supplier<T>`.   
-因为其作为 `Supplier<T>` 的特性，这个 "流" 永远不会被消耗完——因为当你开始消耗的时，它会产生一个新的流，也就是元素的序列。
+`Uni<T>` 是一个 `Consumer<Consumer<T>>`。简单的说，你传给他一个 `Consumer<T>` 的闭包（so-called "Lambda")，之后它会开始产生新元素，并且传递到你的闭包里面。   
+每传一次闭包（调用 `onItem` 方法），`Uni<T>` 都会重新计算并且（在无副作用的情况下）使用相同的元素序列调用你的闭包，类似一个 `Supplier<Stream<T>>`。
 
+消费一个 `Uni<Integer>`:
 ```java
 void main(){
     Uni<Integer> uni = Uni.infiniteAscendingNumber().limit(6);
@@ -12,7 +13,8 @@ void main(){
     uni.filter(it -> it % 2 == 0).onItem(System.out::println);
 }
 ```
-再深入一些，`Uni<T>` 实际上就是别的语言中常见的生成器。
+
+提供一个 `Uni<Integer>`:
 ```java
 Uni<Integer> infiniteAscendingNumber(){
     return consumer -> {
@@ -21,6 +23,8 @@ Uni<Integer> infiniteAscendingNumber(){
     };
 }
 ```
+
+如果你曾经使用过其他语言中生成器特性的 `yield` 功能，你可以认为 `Uni<T>` 实际上就是别的语言中常见的生成器。  
 
 使用 `Uni<T>` 的生成器特性，你可以很方便的处理复杂的数据结构：
 ```java
@@ -39,13 +43,13 @@ Uni<Integer> infiniteAscendingNumber(){
     iterateMethodsWithSuper(...).onItem(...); // 递归遍历一颗类型树上的所有方法
 ```
 
-如果你对 `Uni<T>` 的原理感兴趣，可以移步[这一篇文章](https://developer.aliyun.com/article/1199705), Kiwi 中的 `Uni<T>` 就是文中 `Seq<T>` 在工程上的进一步扩展。
+如果你对 `Uni<T>` 的原理感兴趣，可以移步[这一篇文章](https://developer.aliyun.com/article/1199705)。 Kiwi 中的 `Uni<T>` 就是文中 `Seq<T>` 在工程上的进一步扩展。
 
 ## Interruption
 
-在上面的例子中，你会发现 `infiniteAscendingNumber` 里是一个死循环，而 `limit()` 却可以限制元素的个数，这是通过受检异常类型 `Interruption` 实现的。它并不捆绑 `Uni`，你可以在程序里其他需要使用中断的地方也采用它实现控制流终止。
+在上面的例子中，你会发现 `infiniteAscendingNumber` 里是一个死循环，而 `limit()` 却可以限制元素的个数，这是通过受检异常类型 `Interruption` 实现的。  
 
-`Interruption` 有且仅有一个单例： `Interruption.INTERRUPTION`。抛出 Interruption 的性能损耗相比一般的异常要小，这是因为 `Interruption` 并不会花时间填充栈帧，并且也不会被创建多个实例。
+`Interruption` 并不捆绑 `Uni`，你可以在程序里其他需要使用中断的地方也采用它实现控制流终止。它有且仅有一个单例： `Interruption.INTERRUPTION`。抛出 Interruption 的性能损耗相比一般的异常要小，这是因为 `Interruption` 并不会花时间填充栈帧，并且也不会被创建多个实例。
 
 `Uni<T>` 中还提供了专门针对 `Interruption` 的若干 `Consumer<T>` 变种，详情请移步源代码。
 
@@ -72,20 +76,24 @@ void parallelUni() {
 }
 ```
 
-使用 `#then` 方法你可以加入许多新的操作。在 `lang` 模块里已经编写若干比较少用的管道在 `UniOp` 类中，请自行查阅源代码。
+使用 `#then` 方法你可以扩展出许多新的操作。在 `UniOp` 类中有一些比较少用的管道操作（如 dispatch 和 executor），请自行查阅源代码。
 
 
 ## Result
 
-`Result<T>` 是 `Uni<T>` 的子类型。它有且仅有 `Some<T>` 和 `Fail<?>` 两种类型
+`Result<T>` 是 `Uni<T>` 的子类型。它有且仅能有 `Some<T>` 和 `Fail<?>` 两种类型 (sealed)
 
 Example:
 ```java
-Result<UserInfo> result = gatherUserInfo(usrId);
+
+
+Result<UserInfo> result = Result.fromNotNull(() -> userDao.queryById(usrId));
 return switch(result){
+    // 使用模式匹配和 when clause 实现错误处理
     case Some(UserInfo user) when user.isAdmin -> "Welcome back, Administrator "+user;
     case Some(UserInfo user) -> "Welcome back! " + user;
     case Fail(Exception e) -> "An error occurred when gathering user info: "+e;
+    // result == Fail.none()
     case Fail(Fail.Nothing n) -> "User not found!" 
 }
 ```
@@ -93,10 +101,11 @@ return switch(result){
 或者像 `Optional<T>` 一样使用：
 ```java
 Result<UserInfo> result = gatherUserInfo(usrId);
-return result.orElseThrow();
+return result.orElseThrow(); // or #toOptional() -> Optional<T>
 ```
 
-又因为 `Result<T>` 本身也是一个 `Uni<T>`, 因此 `Uni<T>` 中的管道操作同样适用：
+又因为 `Result<T>` 本身也是一个 `Uni<T>`, 因此 `Uni<T>` 中的管道操作同样适用：  
+(但是要注意的是，使用除 `filter`, `map` 的管道后将会转化为 `Uni`，届时将无法使用 Result 中的方法)
 ```java
 void test(){
     gatherUserInfo(usrId)
@@ -107,7 +116,7 @@ void test(){
 }
 ```
 
-对于 `Fail<?>` 类型，`onItem` 永远不会被调用，且 `T get()` 方法总是返回 null. 通常来说，你应该只考虑使用模式匹配（上文中第一种用法）或者作为 `Uni` 使用管道操作。由于 `onItem` 不会被调用，因此你可以在管道中大胆地使用各种方法而不需要考虑失败的情况。
+对于 `Fail<?>` 类型，`onItem` 永远不会被调用，且 `T get()` 方法总是返回 null. 通常来说，你应该只考虑使用模式匹配（上文中第一种用法）或者作为 `Uni` 使用管道操作。由于 `onItem` 不会被调用，因此你可以在管道中不考虑失败/无值的情况，管道仅在成功时被调用。
 
 ### 使用 Result 捕获受检异常
 `Result.fromAny(AnySupplier<T>)` 可以捕获 `AnySupplier<T>` 中的受检异常从而使用 `Result` 处理结果.
@@ -118,6 +127,6 @@ Result.fromAny(() -> Files.readString(...))
         .onItem(...);
 ```
 
-同样，他还有一个 `runAny`。更多细节请咨询查阅源代码。
+如果你希望视 null 为错误，可以使用 `Result.fromNotNull`.  同样，他还有一个 `runAny`。更多细节请咨询查阅源代码。
 
 

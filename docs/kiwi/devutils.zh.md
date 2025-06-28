@@ -29,22 +29,22 @@ j.u.ImmutableCollections$ListN #2d72f75e {
 }
 ```
 
-文法：
-  - 对象: `fqdn.Class[#Sub[#Sub..] #hashCode { kvPair[] }`
-  - kvPair: `[(inaccessible)] fieldName [(super)] = value`
-  - value:
-    - Primitive and String: Their value. `1` `"hello"` `true`
-    - Primitive Array: `num [ elements[] ]`
-    - Array: `len [ (index. element\n)[] ]`
-    - Visited Object (recursive reference): `(visited) #hashCode`
-    - null: `null`
+文法：  
+  - 对象: `fqdn.Class[#Sub[#Sub..] #hashCode { kvPair[] }`  
+  - kvPair: `[(inaccessible)] fieldName [(super)] = value`  
+  - value:  
+    - Primitive and String: Their value. `1` `"hello"` `true`  
+    - Primitive Array: `num [ elements[] ]`  
+    - Array: `len [ (index. element\n)[] ]`  
+    - Visited Object (recursive reference): `(visited) #hashCode`  
+    - null: `null`  
 
-说人话：
-  - `(inaccessible) data` 就是无法访问到这个字段的值（通常不可能出现）
-  - `element (super)` 就是这个字段是你给的对象的父类里面来的
-  - 数组开头的数字是元素个数，对于非原语的数组至少一行一个元素，每个元素开头的数字是它的下标
-  - 对于在打印之前已经访问过的数据，会被标记 `(visited)` 表示已经访问过了，避免递归
-  - 对象的类名会被缩写成每段包名只保留第一个字母的样子，比如 `j.l.String`
+说人话：  
+  - `(inaccessible) data` 就是无法访问到这个字段的值（通常不可能出现）  
+  - `element (super)` 就是这个字段是你给的对象的父类里面来的  
+  - 数组开头的数字是元素个数，对于非原语的数组至少一行一个元素，每个元素开头的数字是它的下标  
+  - 对于在打印之前已经访问过的数据，会被标记 `(visited)` 表示已经访问过了，避免递归  
+  - 对象的类名会被缩写成每段包名只保留第一个字母的样子，比如 `j.l.String`  
 
 通常你只应该在调试代码里使用 `Diag` 工具。
 

@@ -53,4 +53,5 @@ boxTk.inferType(Cube.class); // TypeToken<Cube<String>>
 
 目前 resolveType 尚不支持 wildcard。  
 此外，`TypeToken<C>` 内还有很多工具方法，如寻找到某个超类的路径等，详情请查阅 Javadoc.  
+
 TypeToken 是线程安全的，且内部有一个对于类型的 `WeakHashMap` 缓存以避免重复创建大量垃圾。该缓存使用 `synchronized` 代码块进行同步，在 JEP 491 (即 Java 24) 前可能会干扰到虚拟线程的性能，请酌情使用。
